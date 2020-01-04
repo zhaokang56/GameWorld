@@ -93,7 +93,7 @@ public class FiveGameCtrl : LinstenerCtrl
             Debug.Log("空位");
             GameObject item = Instantiate(itemObj) as GameObject;
             item.transform.SetParent(ItemParent, false);
-            if (chessPosDic.Count % 2 == 1)
+            if (chessPosDic.Count % 2 == 0)
             {
                 item.GetComponent<Image>().color = Color.black;
                 chessPosDic.Add(chessPos, 1);
@@ -122,7 +122,7 @@ public class FiveGameCtrl : LinstenerCtrl
     {
 		isPlaying = false;
 		winPanel.SetActive(true);
-        if (chessPosDic.Count % 2 == 1)
+        if (chessPosDic.Count % 2 ==0)
             blackWin.SetActive(true);
         else
             whiteWin.SetActive(true);
