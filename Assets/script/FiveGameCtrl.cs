@@ -64,7 +64,7 @@ public class FiveGameCtrl : LinstenerCtrl
 				Debug.Log("黑棋刚走完,允许白棋走");
 				isPlaying = myIsWhite;
 			}
-			SetChessPos(getData.chessPos);
+			SetChessPos(getData.chessPos,getData.isWhite);
 			getData = null;
 		}
     }
@@ -90,14 +90,14 @@ public class FiveGameCtrl : LinstenerCtrl
     /// 设置棋子位置
     /// </summary>
     /// <param name="chessPos"></param>
-    void SetChessPos(Vector2 chessPos)
+    void SetChessPos(Vector2 chessPos, bool isWhite)
     {
         if (!chessPosDic.ContainsKey(chessPos))
         {
             Debug.Log("空位");
             GameObject item = Instantiate(itemObj) as GameObject;
             item.transform.SetParent(ItemParent, false);
-            if (chessPosDic.Count % 2 == 0)
+            if (isWhite==false)
             {
                 item.GetComponent<Image>().color = Color.black;
                 chessPosDic.Add(chessPos, 1);
@@ -109,7 +109,7 @@ public class FiveGameCtrl : LinstenerCtrl
             bool isWin = CheckWin(chessPos);
             if (isWin)
             {
-                PlayOver();
+                PlayOver(isWhite);
             }
             item.GetComponent<RectTransform>().anchoredPosition = chessPos * 50;
             item.SetActive(true);
@@ -122,11 +122,11 @@ public class FiveGameCtrl : LinstenerCtrl
     /// <summary>
     /// 游戏结束
     /// </summary>
-    void PlayOver()
+    void PlayOver(bool isWhite)
     {
 		isPlaying = false;
 		winPanel.SetActive(true);
-        if (chessPosDic.Count % 2 ==0)
+        if (isWhite==false)
             blackWin.SetActive(true);
         else
             whiteWin.SetActive(true);
