@@ -7,6 +7,7 @@ public class LoadingCtrl : MonoBehaviour
 {
 
     public Transform numberGameChioceCtrl;
+    public Button fiveChessBtn;
     // Use this for initialization
     void Start()
     {
@@ -23,6 +24,14 @@ public class LoadingCtrl : MonoBehaviour
             numberGameObj.GetComponent<numberCtrl>().SetLineCount(index+3);
         });
         }
+        fiveChessBtn.onClick.AddListener(
+            () => {
+                Object fiveChessGame = Resources.Load("prefab/FiveChessPanel", typeof(GameObject));
+                //用加载得到的资源对象，实例化游戏对象，实现游戏物体的动态加载
+                GameObject numberGameObj = Instantiate(fiveChessGame) as GameObject;
+                numberGameObj.transform.SetParent(transform.parent, false);
+            }
+            ) ;
     }
 
     

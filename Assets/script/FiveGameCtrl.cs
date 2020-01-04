@@ -13,10 +13,12 @@ public class FiveGameCtrl : LinstenerCtrl
     public RectTransform imgRect;
     public GameObject itemObj;
     public Transform ItemParent;
-    public RectTransform canvasRect;
+     RectTransform canvasRect;
     public GameObject winPanel;
     public GameObject whiteWin;
     public GameObject blackWin;
+    public Button backBtn;
+    public Button overBtn ;
     string myName;
     bool isPlaying=true;
     bool myIsWhite=false;
@@ -25,6 +27,9 @@ public class FiveGameCtrl : LinstenerCtrl
 	Dictionary<Vector2, int> chessPosDic = new Dictionary<Vector2, int>();
 	void Start()
 	{
+        backBtn.onClick.AddListener(() => { Destroy(gameObject); });
+        overBtn.onClick.AddListener(() => { Destroy(gameObject); });
+        canvasRect =transform.parent.GetComponent<RectTransform>();
         myName=GetRandomString(5,true,false,false,false,"");
         Debug.Log(ChatClient.Instance.GetListenersCount()==0);
 		ChatClient.Instance.AddListener(this);
