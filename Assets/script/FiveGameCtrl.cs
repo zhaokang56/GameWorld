@@ -20,6 +20,7 @@ public class FiveGameCtrl : LinstenerCtrl
     string myName;
     bool isPlaying=true;
     bool myIsWhite=false;
+    bool isFirstMsg=true;
 	FiveChessGameData getData;
 	Dictionary<Vector2, int> chessPosDic = new Dictionary<Vector2, int>();
 	void Start()
@@ -76,10 +77,14 @@ public class FiveGameCtrl : LinstenerCtrl
 
     {  
 		 getData = JsonUtility.FromJson<FiveChessGameData>(msg);
-        if (getData.name!=myName)
-        {
-            myIsWhite=true;
-        }   
+         if (isFirstMsg)
+         {
+            if (getData.name!=myName)
+            {
+                myIsWhite=true;
+            } 
+            isFirstMsg=false;  
+         }
 	}
     /// <summary>
     /// 设置棋子位置
