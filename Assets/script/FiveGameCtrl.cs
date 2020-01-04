@@ -19,19 +19,13 @@ public class FiveGameCtrl : LinstenerCtrl
     public GameObject blackWin;
     string myName;
     bool isPlaying=true;
-    bool myIsWhite;
+    bool myIsWhite=false;
 	FiveChessGameData getData;
 	Dictionary<Vector2, int> chessPosDic = new Dictionary<Vector2, int>();
 	void Start()
 	{
-		if (ChatClient.Instance.GetListenersCount()==0)
-		{
-			myIsWhite = false;
-		}
-		if (ChatClient.Instance.GetListenersCount() == 1)
-		{
-			myIsWhite = true;
-		}
+        myName=GetRandomString(5,true,false,false,false,"");
+        Debug.Log(ChatClient.Instance.GetListenersCount()==0);
 		ChatClient.Instance.AddListener(this);
 
 	}
@@ -79,8 +73,13 @@ public class FiveGameCtrl : LinstenerCtrl
         ChatClient.Instance.SendMessage(JsonUtility.ToJson(sendData));
     }
     public override void GetMsg(string msg)
-    {
+
+    {  
 		 getData = JsonUtility.FromJson<FiveChessGameData>(msg);
+        if (getData.name!=myName)
+        {
+            myIsWhite=true;
+        }   
 	}
     /// <summary>
     /// 设置棋子位置
@@ -195,4 +194,21 @@ public class FiveGameCtrl : LinstenerCtrl
         else
             return false;
     }
+    //随机生成字符串
+     string GetRandomString(int length, bool useNum, bool useLow, bool useUpp, bool useSpe, string custom)
+        {
+            byte[] b = new byte[4];
+            new System.Security.Cryptography.RNGCryptoServiceProvider().GetBytes(b);
+           System. Random r = new System. Random(BitConverter.ToInt32(b, 0));
+            string s = 　　"用户", str = custom;
+            if (useNum == true) { str += "0123456789"; }
+            if (useLow == true) { str += "abcdefghijklmnopqrstuvwxyz"; }
+            if (useUpp == true) { str += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; }
+            if (useSpe == true) { str += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; }
+            for (int i = 0; i < length; i++)
+            {
+                s += str.Substring(r.Next(0, str.Length - 1), 1);
+            }
+            return s;
+        } 
 }
