@@ -17,6 +17,7 @@ public class FiveGameCtrl : LinstenerCtrl
     public GameObject winPanel;
     public GameObject whiteWin;
     public GameObject blackWin;
+    public GameObject waittingPanel;
     public Button backBtn;
     public Button overBtn ;
     string myName;
@@ -31,7 +32,8 @@ public class FiveGameCtrl : LinstenerCtrl
         overBtn.onClick.AddListener(() => { Destroy(gameObject); });
         canvasRect =transform.parent.GetComponent<RectTransform>();
         myName=GetRandomString(5,true,false,false,false,"");
-        Debug.Log(ChatClient.Instance.GetListenersCount()==0);
+        GameMessage msg = new GameMessage() {  msgType=MsgType.FiveChessGameStart,msgJson= "content" };
+        ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
 		ChatClient.Instance.AddListener(this);
 
 	}
@@ -77,20 +79,38 @@ public class FiveGameCtrl : LinstenerCtrl
     void SendMsg(Vector2 pos)
     {
         FiveChessGameData sendData = new FiveChessGameData() { chessPos = pos, name = myName, isWhite = myIsWhite };
-        ChatClient.Instance.SendMessage(JsonUtility.ToJson(sendData));
+        string msgString = JsonUtility.ToJson(sendData);
+        GameMessage msg = new GameMessage()
+        {
+            msgType = MsgType.FiveChessGameMsg,
+            msgJson = msgString
+        };
+        ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
     }
     public override void GetMsg(string msg)
 
-    {  
-		 getData = JsonUtility.FromJson<FiveChessGameData>(msg);
-         if (isFirstMsg)
-         {
-            if (getData.name!=myName)
+    {
+       GameMessage gameMsg=  JsonUtility.FromJson<GameMessage>(msg);
+        if (gameMsg.msgType == MsgType.FiveChessGameStart)
+        {
+            if (int.Parse(gameMsg.msgJson) ==2)
             {
-                myIsWhite=true;
-            } 
-            isFirstMsg=false;  
-         }
+                Debug.Log("game Begin");
+                waittingPanel.SetActive(false);
+            }
+        }
+        if (gameMsg.msgType==MsgType.FiveChessGameMsg)
+        {
+            getData = JsonUtility.FromJson<FiveChessGameData>(gameMsg.msgJson);
+             if (isFirstMsg)
+             {
+                if (getData.name!=myName)
+                {
+                    myIsWhite=true;
+                } 
+                isFirstMsg=false;  
+             }
+        }
 	}
     /// <summary>
     /// 设置棋子位置

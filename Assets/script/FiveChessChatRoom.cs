@@ -20,12 +20,12 @@ public class FiveChessChatRoom : LinstenerCtrl {
 	}
 	public override void GetMsg(string msg)
 	{
-		FiveChessGameData getData = JsonUtility.FromJson<FiveChessGameData>(msg);
-		//  string.Format("{0}:将数字{1}挪到第{2}格"
-		 message=string.Format("{0}:走位置：{1},是不是白棋：{2}",getData.name,getData.chessPos,getData.isWhite);
-		// (getMsg)=>{ MessageText.text +="\n"+ getMsg;
-        //      msgScroll.verticalNormalizedPosition =0f;
-	    //     getMsg = "";};
+        GameMessage gameMsg = JsonUtility.FromJson<GameMessage>(msg);
+        if (gameMsg.msgType == MsgType.FiveChessGameMsg)
+        {
+            FiveChessGameData getData = JsonUtility.FromJson<FiveChessGameData>(gameMsg.msgJson);
+		     message=string.Format("{0}:走位置：{1},是不是白棋：{2}",getData.name,getData.chessPos,getData.isWhite);
+        }
 		 
 	}
 	void Update () {

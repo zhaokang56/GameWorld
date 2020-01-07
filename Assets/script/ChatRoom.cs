@@ -20,7 +20,11 @@ public class ChatRoom : LinstenerCtrl {
 	}
 	public override void GetMsg(string msg)
 	{
-	 	 message= msg;
+        GameMessage gameMsg = JsonUtility.FromJson<GameMessage>(msg);
+        if (gameMsg.msgType==MsgType.NumberGameMsg)
+        {
+	 	     message= gameMsg.msgJson;
+        }
 		// (getMsg)=>{ MessageText.text +="\n"+ getMsg;
         //      msgScroll.verticalNormalizedPosition =0f;
 	    //     getMsg = "";};

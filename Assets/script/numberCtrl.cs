@@ -131,7 +131,8 @@ public class numberCtrl : MonoBehaviour
                     rightList.Remove(changeIndex);
                 }
             }
-            ChatClient.Instance.SendMessage(string.Format("{0}:将数字{1}挪到第{2}格",userName,changeIndex,currentEmpty.GetSiblingIndex()+1));
+            GameMessage msg = new GameMessage() { msgType = MsgType.NumberGameMsg, msgJson = string.Format("{0}:将数字{1}挪到第{2}格", userName, changeIndex, currentEmpty.GetSiblingIndex() + 1) };
+            ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
             currentEmpty.Find("Text").GetComponent<Text>().text = changeText;
             currentEmpty.GetComponent<Button>().enabled = true;
             currentEmpty.GetComponent<Image>().color = Color.white;
