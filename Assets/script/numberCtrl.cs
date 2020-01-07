@@ -74,11 +74,12 @@ public class numberCtrl : MonoBehaviour
             Transform objTrans = numberBg.GetChild(i);
 			objTrans.GetComponent<Button>().onClick.RemoveAllListeners();
             objTrans.GetComponent<Button>().onClick.AddListener(() => { OnButtonClick(objTrans); });
-            if (numberList[i] == (i + 1))
+            if (numberList[i] == (i + 1) && numberList[i]!= numberList.Count)
             {
                 rightList.Add(numberList[i]);
             }
         }
+            Debug.Log(rightList.Count);
     }
     private void Start()
     {
@@ -135,7 +136,7 @@ public class numberCtrl : MonoBehaviour
             currentEmpty.GetComponent<Button>().enabled = true;
             currentEmpty.GetComponent<Image>().color = Color.white;
             ChangeToEmpty(clickTrans);
-            if (rightList.Count >= numberList.Count - 1)
+            if (rightList.Count >= numberList.Count-1)
             {
                 Debug.Log("游戏已完成");
                 isPlaying=false;
@@ -255,14 +256,20 @@ public class numberCtrl : MonoBehaviour
     ///获取逆序数
     int GetInverseNumberCount(List<int> numList)
     {
+        //List<int> testList =new List<int>();
+        //testList.Remove(numList.Count);
         int count = 0;
 
         for (int i = 0; i < numList.Count - 1; i++)
         {
             for (int j = i + 1; j < numList.Count; j++)
             {
-                if (numList[i] > numList[j])
-                    count++;
+                if (numList[i]!= numList.Count)
+                {
+                    if (numList[i] > numList[j])
+                        count++;
+                }
+                
             }
         }
         return count;

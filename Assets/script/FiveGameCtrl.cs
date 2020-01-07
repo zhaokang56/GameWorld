@@ -53,6 +53,7 @@ public class FiveGameCtrl : LinstenerCtrl
                 if ((-350 <= x && x <= 350) && (-350 <= y && y <= 350))
                 {
                      Vector2 itemVector = new Vector2(xIndex, yIndex);
+                     if (!chessPosDic.ContainsKey(itemVector))
                         SendMsg(itemVector);
                 }
             }
