@@ -25,6 +25,7 @@ public class FiveGameCtrl : LinstenerCtrl
     bool myIsWhite=false;
     bool isFirstMsg=true;
 	FiveChessGameData getData;
+	int startCount;
 	Dictionary<Vector2, int> chessPosDic = new Dictionary<Vector2, int>();
 	void Start()
 	{
@@ -75,6 +76,12 @@ public class FiveGameCtrl : LinstenerCtrl
 			SetChessPos(getData.chessPos,getData.isWhite);
 			getData = null;
 		}
+		if (startCount==2)
+		{
+			startCount = 0;
+			Debug.Log("game Begin");
+			waittingPanel.SetActive(false);
+		}
     }
     void SendMsg(Vector2 pos)
     {
@@ -95,8 +102,7 @@ public class FiveGameCtrl : LinstenerCtrl
         {
             if (int.Parse(gameMsg.msgJson) ==2)
             {
-                Debug.Log("game Begin");
-                waittingPanel.SetActive(false);
+				startCount = 2;
             }
         }
         if (gameMsg.msgType==MsgType.FiveChessGameMsg)
