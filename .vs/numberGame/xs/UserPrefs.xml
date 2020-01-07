@@ -1,11 +1,28 @@
 ﻿<Properties StartupConfiguration="{EB53B0BB-A25E-107E-A1D6-349F7D5C547D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/numberCtrl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/FiveChessChatRoom.cs">
     <Files>
-      <File FileName="Assets/script/numberCtrl.cs" Line="119" Column="21" />
-      <File FileName="Assets/script/FiveGameCtrl.cs" Line="29" Column="3" />
+      <File FileName="Assets/script/numberCtrl.cs" Line="137" Column="64" />
+      <File FileName="Assets/script/FiveGameCtrl.cs" Line="86" Column="11" />
       <File FileName="Assets/script/FiveChessGameData.cs" />
       <File FileName="Assets/script/ChatRoom.cs" />
+      <File FileName="Assets/script/MsgType.cs" Line="7" Column="15" />
+      <File FileName="Assets/script/ChatClient.cs" Line="74" Column="39" />
+      <File FileName="Assets/script/LinstenerCtrl.cs" Line="7" Column="24" />
+      <File FileName="Assets/script/FiveChessChatRoom.cs" Line="21" Column="23" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="numberGame" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="script" expanded="True">
+                <Node name="FiveChessChatRoom.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
