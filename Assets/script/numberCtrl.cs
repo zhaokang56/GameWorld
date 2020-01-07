@@ -74,6 +74,10 @@ public class numberCtrl : MonoBehaviour
             Transform objTrans = numberBg.GetChild(i);
 			objTrans.GetComponent<Button>().onClick.RemoveAllListeners();
             objTrans.GetComponent<Button>().onClick.AddListener(() => { OnButtonClick(objTrans); });
+            if (numberList[i] == (i + 1))
+            {
+                rightList.Add(numberList[i]);
+            }
         }
     }
     private void Start()

@@ -1,15 +1,15 @@
 ﻿<Properties StartupConfiguration="{EB53B0BB-A25E-107E-A1D6-349F7D5C547D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/FiveGameCtrl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/script/numberCtrl.cs">
     <Files>
-      <File FileName="Assets/script/numberCtrl.cs" Line="129" Column="135" />
-      <File FileName="Assets/script/FiveGameCtrl.cs" Line="69" Column="17" />
-      <File FileName="Assets/script/FiveChessGameData.cs" Line="9" Column="24" />
-      <File FileName="Assets/script/ChatRoom.cs" Line="21" Column="41" />
+      <File FileName="Assets/script/numberCtrl.cs" Line="119" Column="21" />
+      <File FileName="Assets/script/FiveGameCtrl.cs" Line="29" Column="3" />
+      <File FileName="Assets/script/FiveChessGameData.cs" />
+      <File FileName="Assets/script/ChatRoom.cs" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.numberGame PreferredExecutionTarget="1f5037b9-7f1a-48d4-8193-3f351528d34d" />
+  <MonoDevelop.Ide.ItemProperties.numberGame PreferredExecutionTarget="c7e6e9b1-8236-4f25-b19a-f5a68acd929f" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
