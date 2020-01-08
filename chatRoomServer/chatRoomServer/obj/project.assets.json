@@ -735,11 +735,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/zhaokang/Desktop/Projects/chatRoomServer/chatRoomServer/chatRoomServer.csproj",
+      "projectUniqueName": "/Users/zhaokang/Desktop/numberGame/chatRoomServer/chatRoomServer/chatRoomServer.csproj",
       "projectName": "chatRoomServer",
-      "projectPath": "/Users/zhaokang/Desktop/Projects/chatRoomServer/chatRoomServer/chatRoomServer.csproj",
+      "projectPath": "/Users/zhaokang/Desktop/numberGame/chatRoomServer/chatRoomServer/chatRoomServer.csproj",
       "packagesPath": "/Users/zhaokang/.nuget/packages/",
-      "outputPath": "/Users/zhaokang/Desktop/Projects/chatRoomServer/chatRoomServer/obj/",
+      "outputPath": "/Users/zhaokang/Desktop/numberGame/chatRoomServer/chatRoomServer/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
