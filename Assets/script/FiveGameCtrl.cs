@@ -101,12 +101,13 @@ public class FiveGameCtrl : LinstenerCtrl
 		{
 			startCount = 0;
 			Debug.Log("game Begin");
-            isPlaying=true;
+            isPlaying=!myIsWhite;
 			waittingPanel.SetActive(false);
 		}
         if (isRunQuit)
         {
             IsWin(isWin);
+            isRunQuit=false;
         }
     }
     void SendMsg(Vector2 pos)
@@ -177,7 +178,8 @@ public class FiveGameCtrl : LinstenerCtrl
             bool isWin = CheckWin(chessPos);
             if (isWin)
             {
-                PlayOver(isWhite);
+                IsWin(isWhite==myIsWhite);
+                // PlayOver(isWhite);
             }
             item.GetComponent<RectTransform>().anchoredPosition = chessPos * 50;
             item.SetActive(true);
@@ -189,6 +191,8 @@ public class FiveGameCtrl : LinstenerCtrl
     }
     void IsWin( bool isWin)
     {
+		isPlaying = false;
+		winPanel.SetActive(true);
          winObj.SetActive(isWin);
            loseObj.SetActive(!isWin);
     }
@@ -197,8 +201,6 @@ public class FiveGameCtrl : LinstenerCtrl
     /// </summary>
     void PlayOver(bool isWhite)
     {
-		isPlaying = false;
-		winPanel.SetActive(true);
         if (isWhite)
          {
             IsWin(myIsWhite);
