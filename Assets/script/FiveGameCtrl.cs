@@ -31,16 +31,27 @@ public class FiveGameCtrl : LinstenerCtrl
 	void Start()
 	{
         isPlaying=false;
-        backBtn.onClick.AddListener(() => { Destroy(gameObject); });
-        overBtn.onClick.AddListener(() => { Destroy(gameObject); });
+        backBtn.onClick.AddListener(() => { OnQuit(); Destroy(gameObject); });
+        overBtn.onClick.AddListener(() => { OnGameOver(); Destroy(gameObject); });
         canvasRect =transform.parent.GetComponent<RectTransform>();
         myName=GetRandomString(5,true,false,false,false,"");
-        GameMessage msg = new GameMessage() {  msgType=MsgType.FiveChessGameStart,msgJson= "content",roomId=0 };
+        GameMessage msg = new GameMessage() {  msgType=MsgType.FiveChessGameStart,msgJson= "content" };
         ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
 		ChatClient.Instance.AddListener(this);
 
 	}
-	void OnDestroy()
+	void OnQuit()
+	{
+         GameMessage msg = new GameMessage()
+        {
+            msgType = MsgType.FiveChessGameQuit,
+            msgJson = myIsWhite.ToString(),
+            roomId=roomNumber
+        };
+        ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
+		ChatClient.Instance.RemoveListener(this);
+	}
+    void OnGameOver()
 	{
          GameMessage msg = new GameMessage()
         {
@@ -125,6 +136,20 @@ public class FiveGameCtrl : LinstenerCtrl
                 } 
                 isFirstMsg=false;  
              }
+        }
+        if (gameMsg.msgType==MsgType.FiveChessGameQuit)
+        {
+            // isWhiteWin=gameMsg.msgJson
+            if (gameMsg.msgJson==myIsWhite.ToString())
+            {
+                 PlayOver(!myIsWhite);
+                Debug.Log("输了");
+            }
+            else
+            {
+                PlayOver(myIsWhite);
+                Debug.Log("赢了");
+            }
         }
 	}
     /// <summary>

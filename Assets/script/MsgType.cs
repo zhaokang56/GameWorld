@@ -8,6 +8,7 @@ public enum MsgType  {
     FiveChessGameStart = 1000,
     FiveChessGameMsg=1001,
     FiveChessGameEnd=1002,
+    FiveChessGameQuit=1003,
 }
 public class GameMessage
 {
