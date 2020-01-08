@@ -13,4 +13,6 @@ public class GameMessage
 {
     public  MsgType msgType;
     public string msgJson;
+    public int roomId;
+
 }

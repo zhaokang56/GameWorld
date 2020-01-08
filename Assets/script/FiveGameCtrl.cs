@@ -21,25 +21,34 @@ public class FiveGameCtrl : LinstenerCtrl
     public Button backBtn;
     public Button overBtn ;
     string myName;
-    bool isPlaying=true;
+    bool isPlaying=false;
     bool myIsWhite=false;
     bool isFirstMsg=true;
 	FiveChessGameData getData;
 	int startCount;
+	int roomNumber;
 	Dictionary<Vector2, int> chessPosDic = new Dictionary<Vector2, int>();
 	void Start()
 	{
+        isPlaying=false;
         backBtn.onClick.AddListener(() => { Destroy(gameObject); });
         overBtn.onClick.AddListener(() => { Destroy(gameObject); });
         canvasRect =transform.parent.GetComponent<RectTransform>();
         myName=GetRandomString(5,true,false,false,false,"");
-        GameMessage msg = new GameMessage() {  msgType=MsgType.FiveChessGameStart,msgJson= "content" };
+        GameMessage msg = new GameMessage() {  msgType=MsgType.FiveChessGameStart,msgJson= "content",roomId=0 };
         ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
 		ChatClient.Instance.AddListener(this);
 
 	}
 	void OnDestroy()
 	{
+         GameMessage msg = new GameMessage()
+        {
+            msgType = MsgType.FiveChessGameEnd,
+            msgJson = "GameOver",
+            roomId=roomNumber
+        };
+        ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
 		ChatClient.Instance.RemoveListener(this);
 	}
 	void Update()
@@ -80,6 +89,7 @@ public class FiveGameCtrl : LinstenerCtrl
 		{
 			startCount = 0;
 			Debug.Log("game Begin");
+            isPlaying=true;
 			waittingPanel.SetActive(false);
 		}
     }
@@ -90,7 +100,8 @@ public class FiveGameCtrl : LinstenerCtrl
         GameMessage msg = new GameMessage()
         {
             msgType = MsgType.FiveChessGameMsg,
-            msgJson = msgString
+            msgJson = msgString,
+            roomId=roomNumber
         };
         ChatClient.Instance.SendMessage(JsonUtility.ToJson(msg));
     }
@@ -100,10 +111,8 @@ public class FiveGameCtrl : LinstenerCtrl
        GameMessage gameMsg=  JsonUtility.FromJson<GameMessage>(msg);
         if (gameMsg.msgType == MsgType.FiveChessGameStart)
         {
-            if (int.Parse(gameMsg.msgJson) ==2)
-            {
-				startCount = 2;
-            }
+				startCount =(int.Parse(gameMsg.msgJson.Substring(0,1)));
+                roomNumber=(int.Parse(gameMsg.msgJson.Substring(1)));
         }
         if (gameMsg.msgType==MsgType.FiveChessGameMsg)
         {
