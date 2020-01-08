@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 222135647617329736}
   - component: {fileID: 114477428185439108}
   m_Layer: 5
-  m_Name: whiteWin
+  m_Name: win
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 222362869074332614}
   - component: {fileID: 114618443003803230}
   m_Layer: 5
-  m_Name: blackWIn
+  m_Name: lose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6f53faa250dba4609b29e83965c53010, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 974c19abd53d642d59de4424acad2ab6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -651,7 +651,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 59cfb9e048bc042dda6a311e8044acb4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61ef8957d8e8644029d787c155e6c1c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -846,8 +846,8 @@ MonoBehaviour:
   itemObj: {fileID: 1379716914393070}
   ItemParent: {fileID: 224405696543871642}
   winPanel: {fileID: 1791182306682876}
-  whiteWin: {fileID: 1195013832943454}
-  blackWin: {fileID: 1281797467798984}
+  winObj: {fileID: 1195013832943454}
+  loseObj: {fileID: 1281797467798984}
   waittingPanel: {fileID: 1643117269333112}
   backBtn: {fileID: 114284457429211902}
   overBtn: {fileID: 114092435948085650}
@@ -1242,7 +1242,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 554, y: 174}
+  m_SizeDelta: {x: 433, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224722790739697056
 RectTransform:
@@ -1278,7 +1278,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 547, y: 165}
+  m_SizeDelta: {x: 433, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224953709294103888
 RectTransform:

@@ -15,8 +15,8 @@ public class FiveGameCtrl : LinstenerCtrl
     public Transform ItemParent;
      RectTransform canvasRect;
     public GameObject winPanel;
-    public GameObject whiteWin;
-    public GameObject blackWin;
+    public GameObject winObj;
+    public GameObject loseObj;
     public GameObject waittingPanel;
     public Button backBtn;
     public Button overBtn ;
@@ -24,6 +24,8 @@ public class FiveGameCtrl : LinstenerCtrl
     bool isPlaying=false;
     bool myIsWhite=false;
     bool isFirstMsg=true;
+    bool isRunQuit;
+    bool isWin;
 	FiveChessGameData getData;
 	int startCount;
 	int roomNumber;
@@ -103,6 +105,10 @@ public class FiveGameCtrl : LinstenerCtrl
             isPlaying=true;
 			waittingPanel.SetActive(false);
 		}
+        if (isRunQuit)
+        {
+            PlayOver(isWin);
+        }
     }
     void SendMsg(Vector2 pos)
     {
@@ -124,30 +130,24 @@ public class FiveGameCtrl : LinstenerCtrl
         {
 				startCount =(int.Parse(gameMsg.msgJson.Substring(0,1)));
                 roomNumber=(int.Parse(gameMsg.msgJson.Substring(1)));
+                myIsWhite=(startCount==2);
         }
         if (gameMsg.msgType==MsgType.FiveChessGameMsg)
         {
             getData = JsonUtility.FromJson<FiveChessGameData>(gameMsg.msgJson);
-             if (isFirstMsg)
-             {
-                if (getData.name!=myName)
-                {
-                    myIsWhite=true;
-                } 
-                isFirstMsg=false;  
-             }
         }
         if (gameMsg.msgType==MsgType.FiveChessGameQuit)
         {
+            isRunQuit=true;
             // isWhiteWin=gameMsg.msgJson
             if (gameMsg.msgJson==myIsWhite.ToString())
             {
-                 PlayOver(!myIsWhite);
                 Debug.Log("输了");
+                isWin=false;
             }
             else
             {
-                PlayOver(myIsWhite);
+                 isWin=true;
                 Debug.Log("赢了");
             }
         }
@@ -175,7 +175,7 @@ public class FiveGameCtrl : LinstenerCtrl
             bool isWin = CheckWin(chessPos);
             if (isWin)
             {
-                PlayOver(isWhite);
+                PlayOver(isWin);
             }
             item.GetComponent<RectTransform>().anchoredPosition = chessPos * 50;
             item.SetActive(true);
@@ -188,14 +188,14 @@ public class FiveGameCtrl : LinstenerCtrl
     /// <summary>
     /// 游戏结束
     /// </summary>
-    void PlayOver(bool isWhite)
+    void PlayOver(bool isWin)
     {
 		isPlaying = false;
 		winPanel.SetActive(true);
-        if (isWhite==false)
-            blackWin.SetActive(true);
+        if (isWin)
+           winObj.SetActive(true);
         else
-            whiteWin.SetActive(true);
+            loseObj.SetActive(true);
     }
      bool CheckWin(Vector2 indexVector)
     {
